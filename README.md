@@ -7,9 +7,9 @@
 - 🐳 **Docker-based development environment** - Consistent setup across all machines
 - 🧠 **Intelligent framework detection** - Automatically detects and configures your framework
 - ⚛️ **Multiple framework support**:
+  - **Expo** (React Native) - Port 8081
   - **Next.js** (App Router) - Port 3000
   - **React** (with React Router v7) - Port 5173
-  - **Expo** (React Native) - Port 8081
   - **Vue.js** - Port 5173
   - **Vite** - Port 5173
   - **Custom frameworks** - Port 8080
@@ -25,23 +25,25 @@
 **Zero configuration required!** The template automatically detects your framework and configures the appropriate ports:
 
 | Framework | Default Port | Detection Method | Status |
-|-----------|--------------|------------------|--------|
-| Next.js   | 3000         | `"next"` dependency | ✅ Fully Supported |
-| Expo      | 8081         | `"expo"` or `"@expo/"` | ✅ Fully Supported |
-| React     | 5173         | `"react"` (without Next.js) | ✅ Fully Supported |
-| Vue.js    | 5173         | `"vue"` dependency | ✅ Fully Supported |
-| Vite      | 5173         | `"vite"` dependency | ✅ Fully Supported |
-| **Custom** | **8080**     | **Unknown framework** | ✅ **Supported via `init-framework`** |
+| ---- | --- | --- | --- |
+| Expo | 8081 | `"expo"` or `"@expo/"` | ✅ Fully Supported |
+| Next.js | 3000 | `"next"` dependency | ✅ Fully Supported |
+| React | 5173 | `"react"` (without Next.js) | ✅ Fully Supported |
+| Vue.js | 5173 | `"vue"` dependency | ✅ Fully Supported |
+| Vite | 5173 | `"vite"` dependency | ✅ Fully Supported |
+| **Custom** | **8080** | **Unknown framework** | ✅ **Supported via `init-framework`** |
 
 ### How It Works
 
 When you run `make up`, the system will:
+
 1. 📝 Scan your `package.json` for framework dependencies
 2. 🔍 Detect the framework type automatically
 3. ⚙️ Configure appropriate ports without manual intervention
 4. 🚀 Start your development server with the correct configuration
 
 **Example output:**
+
 ```bash
 $ make up
 Detected framework: next (port: 3000)
@@ -236,7 +238,7 @@ react-dockerized/
 ### Environment Variables (.env)
 
 | Variable | Description | Default Value |
-|----------|-------------|---------------|
+| --- | --- | --- |
 | `IMAGE_NAME` | Docker container name | `react-dockerized-app` |
 | `PROJECT_NAME` | Directory name for your project | `my_project` |
 | `NODE_ENV` | Node.js environment | `development` |
