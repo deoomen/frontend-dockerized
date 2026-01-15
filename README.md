@@ -8,6 +8,7 @@
 - 🧠 **Intelligent framework detection** - Automatically detects and configures your framework
 - ⚛️ **Multiple framework support**:
   - **Expo** (React Native) - Port 8081
+  - **Fastify** - Port 3000
   - **Next.js** (App Router) - Port 3000
   - **React** (with React Router v7) - Port 5173
   - **Vue.js** - Port 5173
@@ -27,6 +28,7 @@
 | Framework | Default Port | Detection Method | Status |
 | ---- | --- | --- | --- |
 | Expo | 8081 | `"expo"` or `"@expo/"` | ✅ Fully Supported |
+| Fastify | 3000 | `"next"` dependency | ✅ Fully Supported |
 | Next.js | 3000 | `"next"` dependency | ✅ Fully Supported |
 | React | 5173 | `"react"` (without Next.js) | ✅ Fully Supported |
 | Vue.js | 5173 | `"vue"` dependency | ✅ Fully Supported |

@@ -35,6 +35,7 @@
 # misc
 .DS_Store
 *.pem
+/my_project
 
 # debug
 npm-debug.log*

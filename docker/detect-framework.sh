@@ -22,6 +22,9 @@ if [ -f "$PROJECT_DIR/package.json" ]; then
     elif grep -q '"vite"' "$PROJECT_DIR/package.json"; then
         FRAMEWORK="vite"
         DETECTED_PORT="5173"
+    elif grep -q '"fastify"' "$PROJECT_DIR/package.json"; then
+        FRAMEWORK="fastify"
+        DETECTED_PORT="3000"
     else
         FRAMEWORK="unknown"
         DETECTED_PORT="8080"

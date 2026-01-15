@@ -80,6 +80,31 @@ init-vue:	## Initialize a new Vue App
 init-vite:	## Initialize a new Vite App
 	@make init-framework CREATE_COMMAND="npm create vite@latest ${PROJECT_NAME}"
 
+init-framework-install:	## Initialize a new project with the specified framework that must be installed first
+	@if [ -z "${INSTALL_COMMAND}" ]; then \
+		echo "\033[0;31mError: INSTALL_COMMAND is not set. Please provide an INSTALL_COMMAND.\033[0m"; \
+		echo "Example: make init-custom INSTALL_COMMAND=\"npm install fastify-cli\" CREATE_COMMAND=\"node_modules/.bin/fastify generate ${PROJECT_NAME} --lang=ts\""; \
+		exit 1; \
+	fi; \
+	if [ -z "${CREATE_COMMAND}" ]; then \
+		echo "\033[0;31mError: CREATE_COMMAND is not set. Please provide a CREATE_COMMAND.\033[0m"; \
+		echo "Example: make init-custom INSTALL_COMMAND=\"npm install fastify-cli\" CREATE_COMMAND=\"node_modules/.bin/fastify generate ${PROJECT_NAME} --lang=ts\""; \
+		exit 1; \
+	fi; \
+	make build; \
+	docker run -it -d -v ./:/app --name ${IMAGE_NAME} ${IMAGE_NAME} sh; \
+	echo "\033[0;33mInstalling framework with command:\033[0m ${INSTALL_COMMAND}"; \
+	docker exec -it ${IMAGE_NAME} sh -c "${INSTALL_COMMAND}"; \
+	echo "\033[0;33mInitializing project with command:\033[0m ${CREATE_COMMAND}"; \
+	docker exec -it ${IMAGE_NAME} sh -c "rm -rf ${PROJECT_NAME}"; \
+	docker exec -it ${IMAGE_NAME} sh -c "${CREATE_COMMAND}"; \
+	docker exec -it ${IMAGE_NAME} sh -c "rm -rf node_modules/ package-lock.json package.json"; \
+	docker rm -f ${IMAGE_NAME}; \
+	make build-smart;
+
+init-fastify:	## Initialize a new Fastify App
+	@make init-framework-install INSTALL_COMMAND="npm install fastify-cli" CREATE_COMMAND="node_modules/.bin/fastify generate ${PROJECT_NAME} --lang=ts"
+
 up:	## Start dockers from docker composer
 	@$(call detect_ports); \
 	echo "\033[0;33mUsing ports:\033[0m Host: $$DETECTED_PORT -> Container: $$DETECTED_PORT"; \

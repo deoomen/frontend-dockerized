@@ -16,6 +16,8 @@ detect_framework_and_port() {
             echo "vue:5173"
         elif grep -q '"vite"' package.json; then
             echo "vite:5173"
+        elif grep -q '"fastify"' package.json; then
+            echo "fastify:3000"
         else
             echo "unknown:8080"
         fi
