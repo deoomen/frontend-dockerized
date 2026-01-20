@@ -123,6 +123,7 @@ stop:	## Stop dockers from docker composer
 clean:	## Clean up all stopped containers and unused images
 	@make down
 	@docker rmi ${IMAGE_NAME}
+	@rm -rf ${PROJECT_NAME}
 
 npm:	## Run npm command in the project
 	@docker exec -it ${IMAGE_NAME} sh -c "npm $(ARGS)"
